@@ -18,7 +18,7 @@ function CommonMiddelWare(req, res, next){
 }
 app.use(morgan('combined'))
 app.use(express.json())
-
+app.use(express.urlencoded())
 app.get('/ping/', (req, res) => {
     console.log(req.query)
     return res.json({
@@ -38,6 +38,12 @@ app.get('/ping/:id/comments/:commentsId', (req, res) => {
 app.post('/hello', (req, res) => {
     return res.json({
         message : "World"
+    })
+})
+
+app.use((req, res) => {
+    res.status(404).json({
+        message: "Something went wrong"
     })
 })
 
